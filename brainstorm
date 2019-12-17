@@ -37,13 +37,14 @@ class Grid {
     }
     
 }
+
 // neighbor, mine are all just an instance of Grid Class
 //
 populateHints(arrayOfMines){
-    foreach mine of arrayOfMines {
-        array neighborsOfMine = getNeighbors(mine.grid);
+    for (let mine of arrayOfMines) {
+        array neighborsOfMine = getNeighbors(mine);
         foreach neighbor of neighborsOfMine {
-            if hasHint() === false {
+            if neighbor.hasHint === false {
                 array neighborsOfNeighbor = getNeighbors(neighbor) 
                 //
                 let numberOfMines = 0;

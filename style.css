@@ -2,17 +2,10 @@
     box-sizing: border-box;
 }
 
-#board{
-    background-color: #eee;
-    display: flex;
-    flex-flow: row wrap;
+  td {
+    height : 40px;
+    width : 40px;
+    background:#a8a5a5;
   }
-  
-   #board .block{
-    border: solid gray 1px;
-  }
-  
-  #board .block.selected{
-    border: solid gray 1px;
-    background-color: red;
-  } 
+
+  minesID
