@@ -15,6 +15,6 @@
 ☐ Technologies Used: JavaScript, HTML, CSS, JQuery
 
 
-☐ Getting Started: In this section include the link to your deployed game and any instructions you deem important.
+☐ Getting Started: https://xxiao77.github.io/MineSweeper/
 
 ☐ Next Steps: Reset game board after click "Try Again" button
