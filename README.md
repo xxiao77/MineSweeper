@@ -1,4 +1,5 @@
-<MineSweeper>: 10x10 minesweeper game
+MineSweeper
+ 10x10 minesweeper game
  
 ☐ Left click on cell, will show hints number/or mines.
   -- If is mines, game over. 
