@@ -29,8 +29,8 @@ function init() {
     board();
     randomMines();
     populateHints();
-    console.log(BOARD);
     render();
+    // winWin();
 }
 
 // *** create board BOARD, and add block ***
@@ -174,9 +174,9 @@ function isPlayerWin() {
         for(let i of row) {
             if(!i.clicked && !i.isMine){
                 return false;
-            }    
+            }
         }
-    } 
+    }
     return true;
 }
 
@@ -197,4 +197,18 @@ function render() {
         $('table').off('click');
     }
     
+}
+
+// *** test win condition *** //
+function winWin() {
+    for(let row of BOARD) {
+        for(let i of row) {
+            if(!i.isMine) {
+                clickGrid(i);
+                if (win) {
+                    return;
+                }
+            }
+        }    
+    }
 }
