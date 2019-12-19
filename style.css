@@ -1,11 +1,21 @@
 * {
     box-sizing: border-box;
+    margin-left:auto; 
+    margin-right:auto;
+    text-align:center;
 }
 
   td {
     height : 40px;
     width : 40px;
-    background:#a8a5a5;
+    background:#b3e25c;
   }
 
-  minesID
+  button {
+    font-size: larger;
+    color:  #79a822;
+    font-weight: bolder;
+    border: 4px solid #9ecf42;
+    padding: 20px;
+    border-radius: 25px;
+  }
