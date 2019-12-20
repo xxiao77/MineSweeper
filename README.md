@@ -9,7 +9,7 @@ The game is to clear a board containing hidden mines, with help from clues about
 
 ☐ Getting Started: https://xxiao77.github.io/MineSweeper/
 
-☐ Next Steps: improve CSS and add timer
+☐ Next Steps: improve CSS / add timer / add medium and hard mode / make sure first click not mines or hints only
   
 ☐ Screenshot(s): Images of your actual game.
 
