@@ -5,6 +5,7 @@ const BOARD = [];
 var minesID = [];
 var gameOver;
 var win;
+var boardComplete;
 
 let table = document.querySelector('.myTable');
 
@@ -25,6 +26,7 @@ init();
 
 // *** init function ***
 function init() {
+    boardComplete = false;
     gameOver = false;
     board();
     randomMines();
@@ -37,15 +39,9 @@ function init() {
 function board() {
     for (let x=0; x<ROW.length; x++) {
         var arr = [];
-        // insert <tr>, create row
-        var row = table.insertRow(x);
         for (let y=0; y<COLUMN.length; y++) {
             var grid = new Cell(x,y);
             arr.push(grid);
-        // insert <td>, create column
-            var column = row.insertCell(y);
-            // give id to each <td>
-            column.id = `${x},${y}`;
         }
         BOARD.push(arr);
     }
@@ -63,7 +59,6 @@ function randomMines() {
             BOARD[x][y].isMine = true;
         }       
     }
-        render();
 }
 
     // *** findNeighbors ***
@@ -121,32 +116,29 @@ $('table').on('contextmenu', 'td', function(evt) {
 
     if(clickedCell.isFlag) {
         clickedCell.isFlag = false;
-        document.getElementById(`${clickedCell.x},${clickedCell.y}`).style.backgroundColor = "#b3e25c";
-    }else {
+    } else {
         clickedCell.isFlag = true;
-        document.getElementById(`${clickedCell.x},${clickedCell.y}`).style.backgroundColor = "#d55844";
     }
+    render();
 });
 
-// NOT DONE YET "try again" event listener
+// Click button and page will reload
 $('#reset').on('click', function() {
-    // reload game board
-    console.log("try again");
+    window.location.reload(true); 
 });
 
 // *** click grid and check hints /or mines *** //
 function clickGrid(clickedCell) {
     if(clickedCell.isMine) {
         gameOver = true;
-        render();
     } else {
         revealGrid(clickedCell);
         win = isPlayerWin();
         if (win) {
             gameOver = true;
         }
-        render();
     }
+    render();
 }
 
 // *** Check if need reveal neighbors *** //
@@ -157,13 +149,10 @@ function revealGrid(clickedCell) {
     
     clickedCell.clicked = true;
     if (clickedCell.isHint) {
-        document.getElementById(`${clickedCell.x},${clickedCell.y}`).textContent = clickedCell.hint;
-        document.getElementById(`${clickedCell.x},${clickedCell.y}`).style.backgroundColor = "#e5c29f";
     } else {
         let currentNeighbors = findNeighbors(clickedCell);
         for(let i of currentNeighbors) {
             revealGrid(i);
-            document.getElementById(`${clickedCell.x},${clickedCell.y}`).style.backgroundColor = "#e5c29f";
         }
     }
 }
@@ -182,6 +171,36 @@ function isPlayerWin() {
 
 // *** render *** //
 function render() {
+    // create board view
+    if (!boardComplete) {
+        for(let i of BOARD) {
+            // every row have same 'x' value, take the first one to create <tr>
+            let x = i[0].x;
+            let row = table.insertRow(x);
+            for(let j of i) {
+                let y = j.y;
+                let column = row.insertCell(y);
+                column.id = `${x},${y}`;
+            }
+        }
+        boardComplete = true;
+    }
+
+    for(let row of BOARD) {
+        for(let i of row) {
+            if(i.clicked) {
+                document.getElementById(`${i.x},${i.y}`).style.backgroundColor = "#e5c29f";
+                if(i.isHint) {
+                    document.getElementById(`${i.x},${i.y}`).textContent = i.hint;
+                }
+            } else if (i.isFlag) {
+                document.getElementById(`${i.x},${i.y}`).style.backgroundColor = "#d55844";
+            } else {
+                document.getElementById(`${i.x},${i.y}`).style.backgroundColor = "#b3e25c";
+            }
+        }
+    }
+
     if(gameOver) {
         var btn = document.createElement("button");
         if(win) {
@@ -198,6 +217,8 @@ function render() {
     }
     
 }
+
+// -- finished -- //
 
 // *** test win condition *** //
 function winWin() {
