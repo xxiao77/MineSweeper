@@ -32,6 +32,7 @@ function init() {
     randomMines();
     populateHints();
     render();
+    // winWin();
 }
 
 // *** create board BOARD, and add block ***
@@ -216,6 +217,7 @@ function render() {
     }
     
 }
+
 // -- finished -- //
 
 // *** test win condition *** //
